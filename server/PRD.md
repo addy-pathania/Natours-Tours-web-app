@@ -1,4 +1,3 @@
-
 # Product Requirements Document (PRD)
 
 ## Project Natours Tour's
@@ -22,31 +21,31 @@ Project Natours Tour is a RESTful API service designed to for traversing the tou
 - **Token Management:** Access token refresh mechanism
 - **Role-Based Access Control:** Three-tier permission system (Admin, Project Admin, Member)
 - **Other API features**
-    - Setup ESlint and prettier
-    - Rate Limit
-    - Security
-        - encrypt passwords
-        - ecrypt password reset tokens wiht expiry date
-        - implmenet rate limiting
-        - implement max login attempts
-        - store JWT in httpOnly cookies
-        - sanitize input data(express-mongo-sanitize and xss-clean)
-        - set special http header (use helmet pcakage)
-        - limit the data sent in body
-        - ALways use HTTPS
-        - Use SSL - create certificate
-        - Install NDB for debugging
-    - Error Handling class
-    - Deployment
-    
+  - Setup ESlint and prettier
+  - Rate Limit
+  - Security
+    - encrypt passwords
+    - ecrypt password reset tokens wiht expiry date
+    - implmenet rate limiting
+    - implement max login attempts
+    - store JWT in httpOnly cookies
+    - sanitize input data(express-mongo-sanitize and xss-clean)
+    - set special http header (use helmet pcakage)
+    - limit the data sent in body
+    - ALways use HTTPS
+    - Use SSL - create certificate
+    - Install NDB for debugging
+  - Error Handling class
+  - Deployment
 
 - **Implement later**
-    - CI /CD
-    - Setup payments
-    - Use Multer to update images through form
-        - Optimize images
+  - CI /CD
+  - Setup payments
+  - Use Multer to update images through form
+    - Optimize images
 
 ##### 3.1.1 Single Sign On (SSO)
+
 ![alt text](image-1.png)
 ![alt text](image.png)
 
@@ -72,6 +71,7 @@ Project Natours Tour is a RESTful API service designed to for traversing the tou
 - `POST /resend-email-verification` - Resend verification email (secured)
 
 **Tours Routes** (`/api/v1/tours/)
+
 - `POST /` - Create new tour
 - `GET /` - Get all tours
 - `DELETE /:id` - Delete a tour
@@ -85,37 +85,37 @@ Project Natours Tour is a RESTful API service designed to for traversing the tou
 #### 4.3 Data Models
 
 - User model
-    - avatar
-    - username
-    - email
-    - password
-    - fullname
-    - accessToken
-    - refreshToken
-    - isEmailVerified
-    - forgotPasswordToken
-    - forgotPasswordExpiry,
-    - emailVerificationToken
-    - emailVerificationExpiry
-    - passwordChangedAt
-    - role ['user', 'guide', 'lead guide', 'admin']
+  - avatar
+  - username
+  - email
+  - password
+  - fullname
+  - accessToken
+  - refreshToken
+  - isEmailVerified
+  - forgotPasswordToken
+  - forgotPasswordExpiry,
+  - emailVerificationToken
+  - emailVerificationExpiry
+  - passwordChangedAt
+  - role ['user', 'guide', 'lead guide', 'admin']
 - Tours model
-    - name
-    - slug
-    - duration
-    - maxGroupSize
-    - difficulty
-    - ratingsAverage
-    - ratingsQuaity
-    - price
-    - discount
-    - summary
-    - description
-    - imageCover
-    - images
-    - createdAt
-    - startDates
-    - secretTour
+  - name
+  - slug
+  - duration
+  - maxGroupSize
+  - difficulty
+  - ratingsAverage
+  - ratingsQuaity
+  - price
+  - discount
+  - summary
+  - description
+  - imageCover
+  - images
+  - createdAt
+  - startDates
+  - secretTour
 
 **User Roles:**
 
@@ -124,6 +124,7 @@ Project Natours Tour is a RESTful API service designed to for traversing the tou
 - `member` - Basic project member access
 
 **Packages Used**
+
 - Express
 - cookie-parser
 - cors
@@ -143,4 +144,3 @@ Project Natours Tour is a RESTful API service designed to for traversing the tou
 - multer
 - eslint
 - prettier
-

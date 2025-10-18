@@ -3,9 +3,20 @@
   "version": "1.0.0",
   "description": "Full stack web app with backend API and client for creating and buying tours",
   "main": "index.js",
+  "type": "module",
+  "keywords": [
+    "node",
+    "backend",
+    "API",
+    "frontend",
+    "client"
+  ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Aditya Pathania",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "prettier": "^3.6.2"
+  }
 }
