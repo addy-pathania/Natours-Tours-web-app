@@ -32,7 +32,7 @@ Features
     - `POST /reset-password/:resetToken` - Reset forgotten password
     - `POST /resend-email-verification` - Resend verification email (secured)
    Natours
-    
+
 
 ** Model **
     - User model
@@ -51,13 +51,13 @@ Features
         - passwordChangedAt
         - role ['user', 'guide', 'lead guide', 'admin']
     Natours model
-        - 
+        -
 - hooks
     - hash password on save
 - methods
     - isPasswordCorrect
     - generateAccessToken
-    - genersteRefreshToken
+    - generateRefreshToken
     - generateTemporaryToken
     - changePasswordAfter(boolean)
         - JWTTimestamp should be less than passwordChangedAt
@@ -98,7 +98,7 @@ Features
         - set new token and expiry
         - save the user
         - send email
-    - refreshAcessToken
+    - refreshAccessToken
         - get refreshToken
         - verify refreshToken
         - get User
@@ -108,7 +108,7 @@ Features
         - send it client
     - forgotPassword
         - get email from req
-        - geenrate temporary token
+        - generate temporary token
         - send email
     - resetForgotPassword
         - get resetToken from url
@@ -152,14 +152,14 @@ Features
 
 - Security
     - encrypt passwords
-    - ecrypt password reset tokens wiht expiry date
-    - implmenet rate limiting
+    - encrypt password reset tokens with expiry date
+    - implement rate limiting
     - implement max login attempts
     - store JWT in httpOnly cookies
     - sanitize input data(express-mongo-sanitize and xss-clean)
-    - set special http header (use helmet pcakage)
+    - set special http header (use helmet package)
     - limit the data sent in body
-    - ALways use HTTPS
+    - Always use HTTPS
     - Use SSL - create certificate
     - Install NDB for debugging
 
@@ -172,24 +172,24 @@ Features
 
 
  - webapp makes a code request to the authorizations servers /authorize endpoint
- - authroization server redirects(302) the user to the authorization servers login page(googles login page)
- - User logs in and with deatils and gives consent to the authentication server
+ - authorization server redirects(302) the user to the authorization servers login page(googles login page)
+ - User logs in and with details and gives consent to the authentication server
  - authorization server sends a code response to the web app
- - webapp sends back the code + client secret(lives on webapps server) to the authorization server's /token endpoint
- - authroization server sends back the access token
+ - webapp sends back the code + client secret(lives on webapp server) to the authorization server's /token endpoint
+ - authorization server sends back the access token
  - this access token gets saved in the browser either in local storage or cookies
  - the access token gets attached to all subsequent requests.
 
  - Install passport and passport for google
- - setup passport middleware 
+ - setup passport middleware
     - initialize the new Strategy which will take in AUTH_OPTIONS and verifyCallback
-        - AUTH_OPTIONS will have client_id, cliet_secret and callbackUrl
-        - verifyCallback will be used to verify the accessToken if we use traditinal auth flow or saving the user data 
+        - AUTH_OPTIONS will have client_id, client_secret and callbackUrl
+        - verifyCallback will be used to verify the accessToken if we use traditional auth flow or saving the user data
           i.e the profile to the database
         - Create the /auth/google/callback' endpoint
             Used to handle
-                - THis is the callbakcUrl to which the googgle sends the code response to
-                - Then this enpoint with the help of passport sends back the code and clientSecret to google
+                - TThis is the callbackUrl to which the google sends the code response to
+                - Then this endpoint with the help of passport sends back the code and clientSecret to google
                 - google sends back accessToken and refreshToken
         - Create '/auth/google' endpoint
             - initialize the authentication flow
