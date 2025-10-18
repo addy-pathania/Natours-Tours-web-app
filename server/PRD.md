@@ -5,7 +5,7 @@
 ### 1. Product Overview
 
 **Product Name:** Project Natours Tour's Full App (Frontend/Backend)
-**Version:** 1.0.0  
+**Version:** 1.0.0
 **Product Type:** Backend API for Project Management System
 
 Project Natours Tour is a RESTful API service designed to for traversing the tours site.
@@ -49,7 +49,7 @@ Project Natours Tour is a RESTful API service designed to for traversing the tou
 ![alt text](image-1.png)
 ![alt text](image.png)
 
-#### 3.7 System Health
+#### 3.2 System Health
 
 - **Health Check:** API endpoint for system status monitoring
 
@@ -82,7 +82,7 @@ Project Natours Tour is a RESTful API service designed to for traversing the tou
 
 - `GET /` - System health status
 
-#### 4.3 Data Models
+#### 4.2 Data Models
 
 - User model
   - avatar
@@ -106,7 +106,7 @@ Project Natours Tour is a RESTful API service designed to for traversing the tou
   - maxGroupSize
   - difficulty
   - ratingsAverage
-  - ratingsQuaity
+  - ratingsQuantity
   - price
   - discount
   - summary
