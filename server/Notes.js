@@ -1,57 +1,9 @@
 /*
 Create Node API for Natours Project
-
-Features
- - User authentication and authorization
- - social sign on
- - Return Natours routes and protect them
-
  BACKEND
 
 **Files and Functions**
 
-**App.tsx**
-- Put app logic
-
-** Index.tsx **
-- Put server start logic
-
-**Db.tsx**
-- Connect to MongoDB
-
-** Routes **
-   User
-    - `POST /register` - User registration
-    - `POST /login` - User authentication
-    - `POST /logout` - User logout (secured)
-    - `GET /current-user` - Get current user info (secured)
-    - `POST /change-password` - Change user password (secured)
-    - `POST /refresh-token` - Refresh access token
-    - `GET /verify-email/:verificationToken` - Email verification
-    - `POST /forgot-password` - Request password reset
-    - `POST /reset-password/:resetToken` - Reset forgotten password
-    - `POST /resend-email-verification` - Resend verification email (secured)
-   Natours
-
-
-** Model **
-    - User model
-        - avatar
-        - username
-        - email
-        - password
-        - fullname
-        - accessToken
-        - refreshToken
-        - isEmailVerified
-        - forgotPasswordToken
-        - forgotPasswordExpiry,
-        - emailVerificationToken
-        - emailVerificationExpiry
-        - passwordChangedAt
-        - role ['user', 'guide', 'lead guide', 'admin']
-    Natours model
-        -
 - hooks
     - hash password on save
 - methods

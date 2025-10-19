@@ -25,24 +25,27 @@ Project Natours Tour is a RESTful API service designed to for traversing the tou
   - Rate Limit
   - Security
     - encrypt passwords
-    - ecrypt password reset tokens wiht expiry date
-    - implmenet rate limiting
+    - encrypt password reset tokens with expiry date
+    - implement rate limiting ( express-rate-limit)
     - implement max login attempts
-    - store JWT in httpOnly cookies
+    - store JWT in httpOnly cookies (cookie-parser)
     - sanitize input data(express-mongo-sanitize and xss-clean)
-    - set special http header (use helmet pcakage)
+    - set special http header (helmet)
     - limit the data sent in body
+    - protect against HTTP Parameter Pollution attacks (hpp)
     - ALways use HTTPS
+    - send important headers in request (helmet)
     - Use SSL - create certificate
-    - Install NDB for debugging
+    - Install NDB for debugging (ndb)
   - Error Handling class
   - Deployment
-
-- **Implement later**
-  - CI /CD
-  - Setup payments
+  - CI / CD
+  - Setup payments gateway
   - Use Multer to update images through form
     - Optimize images
+
+  **Other basic dev features**
+  - User **morgan** for HTTP request logger middleware
 
 ##### 3.1.1 Single Sign On (SSO)
 
@@ -101,7 +104,6 @@ Project Natours Tour is a RESTful API service designed to for traversing the tou
   - role ['user', 'guide', 'lead guide', 'admin']
 - Tours model
   - name
-  - slug
   - duration
   - maxGroupSize
   - difficulty
@@ -113,9 +115,7 @@ Project Natours Tour is a RESTful API service designed to for traversing the tou
   - description
   - imageCover
   - images
-  - createdAt
   - startDates
-  - secretTour
 
 **User Roles:**
 
