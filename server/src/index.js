@@ -11,7 +11,7 @@ const port = process.env.PORT || 3000;
 connectDB()
   .then(() => {
     app.listen(port, () => {
-      console.log(`✅ Natours app listening on port ${port}`);
+      console.log(`✅ Natours Tours App listening on port ${port}`);
     });
   })
   .catch((err) => {
