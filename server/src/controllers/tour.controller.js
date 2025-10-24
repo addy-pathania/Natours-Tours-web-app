@@ -89,4 +89,27 @@ export const deleteTour = async (req, res) => {
   }
 };
 
-export const updateTour = async (req, res) => {};
+export const updateTour = async (req, res) => {
+  const { id, name, price, summary } = req.params;
+
+  try {
+    const tour = await TourModel.findByIdAndUpdate(id, { name, price, summary }, { new: true });
+
+    if (!tour) {
+      throw new Error('Tour not found');
+    }
+
+    res.status(200).json({
+      status: 'success',
+      message: `Tour ${id} updated successfully.`,
+      data: {
+        tour,
+      },
+    });
+  } catch (err) {
+    res.status(500).json({
+      status: 'error',
+      message: err.message,
+    });
+  }
+};
