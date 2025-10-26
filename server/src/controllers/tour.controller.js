@@ -1,23 +1,25 @@
 ﻿import TourModel from '../models/tour.model.js';
+import ErrorApi from '../utils/errorApi.js';
+import ResponseApi from '../utils/responseApi.js';
 
-export const getAllTours = async (req, res) => {
+/**
+ * Get all tours
+ */
+export const getAllTours = async (req, res, next) => {
   try {
     const tours = await TourModel.find();
-    res.status(200).json({
-      status: 'success',
-      results: tours.length,
-      data: { tours },
-    });
+    return new ResponseApi(200, 'success', { tours }, tours.length).send(res);
   } catch (err) {
-    res.status(500).json({
-      status: 'error',
-      message: err.message,
-    });
+    next(new ErrorApi(err.message, 500));
   }
 };
 
-export const createTour = async (req, res) => {
+/**
+ * Create a new tour
+ */
+export const createTour = async (req, res, next) => {
   const { name, price, summary } = req.body;
+
   const newTour = {
     name,
     price,
@@ -26,70 +28,62 @@ export const createTour = async (req, res) => {
 
   try {
     await TourModel.create(newTour);
-    res.status(201).json({
-      status: 'success',
-      data: newTour,
-    });
+
+    return new ResponseApi(201, 'success', { tour: newTour }).send(res);
   } catch (err) {
-    res.status(500).json({
-      status: 'error',
-      message: err.message,
-    });
+    if (err.code === 11000) {
+      const value = err.errmsg.match(/(["'])(\\?.)*?\1/)[0];
+      return next(new ErrorApi(`Tour with name '${value}' already exists`, 400));
+    }
+    next(new ErrorApi(err.message, 500));
   }
 };
 
-export const getTour = async (req, res) => {
+/**
+ * Get a tour by ID
+ */
+export const getTour = async (req, res, next) => {
   const id = req.params.id;
   try {
     const tour = await TourModel.findById(id);
 
     if (!tour) {
-      return res.status(404).json({
-        status: 'fail',
-        message: 'Tour not found',
-      });
+      return next(new ErrorApi(`Tour not found with id ${id}`, 404));
     }
 
-    res.status(200).json({
-      status: 'success',
-      data: {
-        tour,
-      },
-    });
+    return new ResponseApi(200, 'success', { tour }).send(res);
   } catch (err) {
-    res.status(500).json({
-      status: 'error',
-      message: err.message,
-    });
+    if (err.name === 'CastError') {
+      return next(new ErrorApi(`Invalid ${err.path}: ${err.value}`, 400));
+    }
+
+    return next(new ErrorApi(err.message, 500));
   }
 };
 
-export const deleteTour = async (req, res) => {
+/**
+ * Delete a tour by ID
+ */
+export const deleteTour = async (req, res, next) => {
   const id = req.params.id;
 
   try {
     const tour = await TourModel.findByIdAndDelete(id);
 
     if (!tour) {
-      return res.status(404).json({
-        status: 'fail',
-        message: 'Tour not found',
-      });
+      return next(new ErrorApi(`Tour not found with id ${id}`, 404));
     }
 
-    res.status(200).json({
-      status: 'success',
-      message: `Tour ${id} deleted successfully`,
-    });
+    return new ResponseApi(204, 'success', null).send(res);
   } catch (err) {
-    res.status(500).json({
-      status: 'error',
-      message: err.message,
-    });
+    next(new ErrorApi(err.message, 500));
   }
 };
 
-export const updateTour = async (req, res) => {
+/**
+ * Update a tour by ID
+ */
+export const updateTour = async (req, res, next) => {
   const { id } = req.params;
   const updateData = req.body;
 
@@ -97,20 +91,11 @@ export const updateTour = async (req, res) => {
     const tour = await TourModel.findByIdAndUpdate(id, updateData, { new: true });
 
     if (!tour) {
-      throw new Error('Tour not found');
+      return next(new ErrorApi(`Tour not found with id ${id}`, 404));
     }
 
-    res.status(200).json({
-      status: 'success',
-      message: `Tour ${id} updated successfully.`,
-      data: {
-        tour,
-      },
-    });
+    return new ResponseApi(200, 'success', { tour }).send(res);
   } catch (err) {
-    res.status(500).json({
-      status: 'error',
-      message: err.message,
-    });
+    next(new ErrorApi(err.message, 500));
   }
 };

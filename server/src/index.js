@@ -7,14 +7,34 @@ dotenv.config({
 });
 
 const port = process.env.PORT || 3001;
+let server;
+
+process.on('uncaughtException', (err) => {
+  console.log('UNCAUGHT EXCEPTION! 💥 Shutting down...');
+  console.log(err.name, err.message);
+  process.exit(1);
+});
 
 connectDB()
   .then(() => {
-    app.listen(port, () => {
+    server = app.listen(port, () => {
       console.log(`✅ Natours Tours App listening on port ${port}`);
     });
   })
   .catch((err) => {
-    console.error('MongoDB connection error', err);
+    console.error('DATABASE CONNECTION FAILED! 💥', err);
     process.exit(1);
   });
+
+process.on('unhandledRejection', (err) => {
+  console.log('UNHANDLED REJECTION! 💥 Shutting down...');
+  console.log(err.name, err.message);
+
+  if (server) {
+    server.close(() => {
+      process.exit(1);
+    });
+  } else {
+    process.exit(1);
+  }
+});
