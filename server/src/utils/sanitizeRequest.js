@@ -1,51 +1,41 @@
-﻿// Middleware to sanitize incoming requests to prevent NoSQL injection and XSS attacks
-const sanitizeRequest = (req, res, next) => {
+﻿// middleware/sanitize.middleware.js
+export const sanitizeRequest = (req, res, next) => {
   // Sanitize req.body
   if (req.body) {
-    req.body = sanitize(req.body);
+    req.body = sanitizeMongoInput(req.body);
   }
 
   // Can't modify req.query in Express v5, create sanitized copy
   if (req.query && Object.keys(req.query).length > 0) {
-    req.sanitizedQuery = sanitize(req.query);
+    req.sanitizedQuery = sanitizeMongoInput(req.query);
     // Use req.sanitizedQuery in your controllers instead of req.query
   }
 
   if (req.params) {
-    req.params = sanitize(req.params);
+    req.params = sanitizeMongoInput(req.params);
   }
 
   next();
 };
 
-function sanitize(obj) {
+function sanitizeMongoInput(obj) {
   if (typeof obj !== 'object' || obj === null) {
-    // Sanitize strings for XSS
-    if (typeof obj === 'string') {
-      return obj
-        .replace(/[<>]/g, '') // Remove < and >
-        .replace(/javascript:/gi, '') // Remove javascript: protocol
-        .replace(/on\w+=/gi, ''); // Remove event handlers like onclick=
-    }
     return obj;
   }
 
   if (Array.isArray(obj)) {
-    return obj.map(sanitize);
+    return obj.map(sanitizeMongoInput);
   }
 
   const sanitized = {};
-  for (let [key, value] of Object.entries(obj)) {
+  for (const [key, value] of Object.entries(obj)) {
     // Remove keys that start with $ or contain . (NoSQL injection)
     if (key.startsWith('$') || key.includes('.')) {
       continue;
     }
 
-    // Sanitize the key itself
-    key = key.replace(/[<>]/g, '');
-
-    sanitized[key] = typeof value === 'object' ? sanitize(value) : sanitize(value);
+    sanitized[key] = typeof value === 'object' ? sanitizeMongoInput(value) : value;
   }
+
   return sanitized;
 }
-export default sanitizeRequest;

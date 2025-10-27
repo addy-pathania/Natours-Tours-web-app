@@ -29,7 +29,7 @@ Project Natours Tour is a RESTful API service designed to for traversing the tou
     - implement rate limiting ( express-rate-limit)
     - implement max login attempts
     - store JWT in httpOnly cookies (cookie-parser)
-    - sanitize input data(express-mongo-sanitize and xss-clean)
+    - sanitize input data
     - set special http header (helmet)
     - limit the data sent in body
     - protect against HTTP Parameter Pollution attacks (hpp)
@@ -135,12 +135,10 @@ Project Natours Tour is a RESTful API service designed to for traversing the tou
 - mongoose
 - jsonwebtoken
 - bcrypt
-- express-mongo-sanitize
 - express-rate-limit
 - helmet
 - morgan
 - hpp
-- xss-clean
 - multer
 - eslint
 - prettier

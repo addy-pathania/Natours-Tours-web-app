@@ -15,45 +15,45 @@ const TourSchema = new Schema({
     required: true,
     trim: true,
   },
-  slug: String,
-  // difficulty: {
-  //   type: String,
-  //   required: true,
-  //   enum: ['easy', 'medium', 'hard'],
-  // },
-  // duration: {
-  //   type: Number,
-  //   required: true,
-  // },
-  // maxGroupSize: {
-  //   type: Number,
-  //   required: true,
-  // },
-  // description: {
-  //   type: String,
-  //   trim: true,
-  // },
-  // imageCover: {
-  //   type: String,
-  //   required: true,
-  // },
-  // ratingsAverage: {
-  //   type: Number,
-  //   default: 3,
-  // },
-  // ratingsQuantity: {
-  //   type: Number,
-  //   default: 0,
-  // },
+  // slug: String,
+  difficulty: {
+    type: String,
+    required: true,
+    enum: ['easy', 'medium', 'difficult'],
+  },
+  duration: {
+    type: Number,
+    required: true,
+  },
+  maxGroupSize: {
+    type: Number,
+    required: true,
+  },
+  description: {
+    type: String,
+    trim: true,
+  },
+  imageCover: {
+    type: String,
+    required: true,
+  },
+  ratingsAverage: {
+    type: Number,
+    default: 3,
+  },
+  ratingsQuantity: {
+    type: Number,
+    default: 0,
+  },
   // TODO: implement image upload feature
-  // images: [String],
-  // createdAt: {
-  //   type: Date,
-  //   default: Date.now,
-  // },
-  // startDates: {
-  //   type: [Date],
-  // },
+  images: [String],
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
+  startDates: {
+    type: [Date],
+  },
 });
 
 const TourModel = mongoose.model('Tour', TourSchema);

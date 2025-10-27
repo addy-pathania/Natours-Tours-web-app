@@ -4,6 +4,7 @@ import cors from 'cors';
 import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
 import hpp from 'hpp';
+import { xss } from 'express-xss-sanitizer';
 
 import sanitizeRequest from './utils/sanitizeRequest.js';
 import toursRouter from './routes/tours.routes.js';
@@ -32,8 +33,10 @@ app.use(express.json({ limit: '10kb' }));
 app.use(express.urlencoded({ extended: true, limit: '10kb' }));
 // Serving static files
 app.use(express.static('public'));
-// Data
+// Data sanitization against NoSQL query injection
 app.use(sanitizeRequest);
+// Data sanitization against XSS
+app.use(xss());
 // Prevent parameter pollution
 app.use(hpp());
 // Enable CORS
