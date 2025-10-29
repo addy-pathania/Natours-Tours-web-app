@@ -5,11 +5,11 @@ class ResponseApi {
   constructor(statusCode, status, data, message = null, results = null) {
     this.statusCode = statusCode;
     this.status = status;
-    this.data = data;
-
     if (results !== null) {
       this.results = results;
     }
+    this.data = data;
+
     if (message) {
       this.message = message;
     }

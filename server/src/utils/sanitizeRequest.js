@@ -1,5 +1,5 @@
 ﻿// middleware/sanitize.middleware.js
-export const sanitizeRequest = (req, res, next) => {
+const sanitizeRequest = (req, res, next) => {
   // Sanitize req.body
   if (req.body) {
     req.body = sanitizeMongoInput(req.body);
@@ -39,3 +39,5 @@ function sanitizeMongoInput(obj) {
 
   return sanitized;
 }
+
+export default sanitizeRequest;
